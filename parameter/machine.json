@@ -1,0 +1,62 @@
+{
+	"api_version": "1.0",
+	"deepmd_version": "2.0.1",
+	"train" :[
+		{
+			"command": "dp",
+			"machine": {
+				"batch_type": "Slurm",
+				"context_type": "local",
+				"local_root" : "./",
+				"remote_root": "./"
+			},
+			"resources": {
+				"number_node": 1,
+				"cpu_per_node": 12,
+				"gpu_per_node": 1,
+				"group_size": 1,
+				"queue_name": "gpu",
+				"source_list": ["~/.bashrc; module load conda;conda activate deepmd"]
+
+			}
+		}
+	],
+	"model_devi":[
+		{
+			"command": "mpirun lmp",
+			"machine": {
+				"batch_type": "Slurm",
+				"context_type": "local",
+				"local_root" : "./",
+				"remote_root": "./"
+			},
+			"resources": {
+				"number_node": 1,
+				"cpu_per_node": 26,
+				"gpu_per_node": 0,
+				"group_size": 1,
+				"queue_name": "standard",
+				"source_list": ["~/.bashrc; module load conda;conda activate deepmd"]
+			}
+		}
+	],
+	"fp":[
+		{
+			"command": "mpirun vasp_gam",
+			"machine": {
+				"batch_type": "Slurm",
+				"context_type": "local",
+				"local_root" : "./",
+				"remote_root": "./"
+			},
+			"resources": {
+				"number_node": 1,
+				"cpu_per_node": 52,
+				"gpu_per_node": 0,
+				"group_size": 1,
+				"queue_name": "standard",
+				"module_list": ["VASP/5.4.4-gzbuild"]
+			}
+		}
+	]
+}
